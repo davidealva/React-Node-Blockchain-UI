@@ -1,0 +1,21 @@
+{
+  "name": "ui-app",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "axios": "^0.18.0",
+    "material-ui": "^0.20.1",
+    "muicss": "^0.9.39",
+    "react": "^16.3.2",
+    "react-bootstrap-table": "^4.3.1",
+    "react-dom": "^16.3.2",
+    "react-scripts": "1.1.4"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
+  },
+  "proxy": "http://localhost:3001/"
+}
