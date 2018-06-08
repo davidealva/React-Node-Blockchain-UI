@@ -71,21 +71,38 @@ class Endpoint extends Component {
 }
 
 class Add extends Component {
+  onSubmit(event) {
+		event.preventDefault();
+		const data = new FormData(event.target);
+
+    let content = data.get('content')
+    console.log(content)
+    let tags = data.get('tags')
+    console.log(tags)
+
+		const url = `/add/content/?content=${content}&tags=${tags}`
+		console.log(url)
+
+    axios.get(url)
+    .then(res => {
+      this.setState({ response: res.data });
+    })
+  }
 
 	render() {
 		return (
 			<div id="add" className="mui-col-md-4">
         <h4>Add Text To Blockchain:</h4>
 				<div>
-          <Form>
-            <Input label="Text:" placeholder="Enter text string to add" type="text" name="add_text" required />
-            <Input label="Tags:" placeholder="tag=value, tag2=value2" type="text" name="add_tags" required />
+          <Form onSubmit={this.onSubmit.bind(this)}>
+            <Input label="Text:" placeholder="Enter text string to add" type="text" name="content" required />
+            <Input label="Tags:" placeholder="tag=value, tag2=value2" type="text" name="tags" required />
             <Button color="primary" type="submit" value="Submit">Submit</Button>
           </Form>
 				</div>
         <h4>Add File To Blockchain:</h4>
         <div>
-          <Form onSubmit={this.onFormSubmit}>
+          <Form onSubmit={this.onSubmit.bind(this)}>
             <Input label="Tags:" placeholder="tag=value, tag2=value2" type="text" name="add_tags" required />
             <Input color="primary" type="file" onChange={this.onChange} />
             <Button color="primary" type="submit" value="Submit">Submit</Button>
@@ -215,10 +232,13 @@ class Query extends Component {
     startTime = Date.parse(startTime)
     startTime = Math.round(startTime / 1000)
     console.log('The button was clicked.', startTime)
+
     const newTime = startTime - param
     console.log('New time: ', newTime)
+
     let readDate = new Date(newTime * 1000)
     console.log('readable : ', readDate)
+
     this.setState({ startTime: readDate })
     console.log(this.state.startTime)
   }
