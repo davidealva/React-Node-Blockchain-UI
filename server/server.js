@@ -171,7 +171,25 @@ app.get('/download', (req, res) => {
 
 // /addFile route - writeAddFile
 app.get('/upload', (req, res) => {
+  const ip = url+'/store/add'
 
+  // content to base64
+  const query = req.query.file
+  const content = new Buffer(query)
+  const content64 = content.toString('base64')
+
+  //need to grab content and tag
+  const data = {
+    content: content64,
+    tags: req.query.tags.split(',')
+  }
+
+  callApi(ip, token, data)
+  .then(data => {
+    res.send({
+      data: data.result
+    })
+  })
 })
 
 
