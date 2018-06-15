@@ -25,6 +25,36 @@ class App extends Component {
     });
   }
 
+  onSubmitContent(event) {
+		event.preventDefault();
+		const data = new FormData(event.target);
+
+    let content = data.get('content')
+    console.log(content)
+    let tags = data.get('tags')
+    console.log(tags)
+
+		const url = `/add/content/?content=${content}&tags=${tags}`
+		console.log(url)
+    this.callApi(url)
+  }
+
+  onSubmitFile(event) {
+    event.preventDefault();
+    const data = new FormData(event.target);
+    //
+    // data.append('filename',)
+    let content = data.get('filename')
+    console.log(content.name)
+    let tags = data.get('tags')
+    console.log(tags)
+
+    const url = `/upload/?file=${content}&tags=${tags}`
+    // const url = `/upload/?file=${content}&tags=${tags}`
+    console.log(url)
+    this.callApi(url)
+  }
+
   handleHash(event) {
     event.preventDefault();
     const data = new FormData(event.target);
@@ -99,7 +129,11 @@ class App extends Component {
           <Endpoint />
         </Row>
         <Row>
-          <Add />
+          <Add
+            onSubmitContent={ this.onSubmitContent.bind(this) }
+            onSubmitFile={ this.onSubmitFile.bind(this) }
+            response={ this.state.response }
+          />
 				  <Query
             handleHash={ this.handleHash.bind(this) }
             handleContent={ this.handleContent.bind(this) }
