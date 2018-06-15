@@ -70,27 +70,27 @@ class Query extends Component {
         </div>
         <div>
           <Form inline={true} onSubmit={this.props.handleContent}>
-            <Input label="Content:" placeholder="Enter content" type="text" name="content" value={this.state.content} onChange={this.handleChange}/>
+            <Input label="Content:" placeholder="Enter content" type="text" name="content" value={this.state.content} onChange={this.handleChange} required/>
             <Button className="mui--pull-right" color="primary" type="submit" value="Submit">Submit</Button>
             <div className="mui--clearfix"></div>
           </Form>
         </div>
         <div>
           <Form inline={true} onSubmit={this.props.handleHash}>
-            <Input label="Content Hash:" placeholder="Enter content hash" type="text" name="content_hash" value={this.state.content_hash} onChange={this.handleChange}/>
+            <Input label="Content Hash:" placeholder="Enter content hash" type="text" name="content_hash" value={this.state.content_hash} onChange={this.handleChange} required/>
             <Button className="mui--pull-right" color="primary" type="submit" value="Submit">Submit</Button>
             <div className="mui--clearfix"></div>
           </Form>
         </div>
         <div>
           <Form inline={true} onSubmit={this.props.handleHash}>
-            <Input label="Transaction Hash:" placeholder="Enter transaction hash" name="transaction_hash" value={this.state.transaction_hash} onChange={this.handleChange}/>
+            <Input label="Transaction Hash:" placeholder="Enter transaction hash" name="transaction_hash" value={this.state.transaction_hash} onChange={this.handleChange} required/>
             <Button className="mui--pull-right" color="primary" type="submit" value="Submit">Submit</Button>
           </Form>
         </div>
         <div>
           <Form inline={true} onSubmit={this.props.handleTags}>
-          <Input label="Tags:" placeholder="Enter tag name and value seperated by comma (tag=val, tag2=val2)" name="tags" value={this.state.tags} onChange={this.handleChange}/>
+          <Input label="Tags:" placeholder="Enter tag name and value seperated by comma (tag=val, tag2=val2)" name="tags" value={this.state.tags} onChange={this.handleChange} required/>
             <Button className="mui--pull-right" color="primary" type="submit" value="Submit">Submit</Button>
           </Form>
         </div>

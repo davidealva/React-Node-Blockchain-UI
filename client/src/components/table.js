@@ -7,10 +7,10 @@ class Table extends Component {
   render(){
     return(
       <BootstrapTable data={this.props.response.data} striped hover condensed>
-        <TableHeaderColumn isKey dataField='transaction_hash'>Timestamp</TableHeaderColumn>
-        <TableHeaderColumn dataField='content_hash'>Conetent Hash</TableHeaderColumn>
-        <TableHeaderColumn dataField='tags'>Transaction Hash</TableHeaderColumn>
-        <TableHeaderColumn dataField='timestamp'>Tags</TableHeaderColumn>
+        <TableHeaderColumn isKey dataField='transaction_hash'>Transaction Hash</TableHeaderColumn>
+        <TableHeaderColumn dataField='content_hash'>Content Hash</TableHeaderColumn>
+        <TableHeaderColumn dataField='tags'>Tags</TableHeaderColumn>
+        <TableHeaderColumn dataField='timestamp'>Timestamp</TableHeaderColumn>
       </BootstrapTable>
     )
   }
