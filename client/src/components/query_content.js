@@ -2,7 +2,6 @@
 import React, { Component } from 'react'
 import { Form, Button, Input, Col } from 'muicss/react'
 
-
 const now = new Date()
 const timeNow = now.getTime()
 
@@ -17,11 +16,7 @@ class Query extends Component {
       endTime: new Date(now),
 		}
     this.handleChange = this.handleChange.bind(this)
-    // this.handleHash = this.handleHash.bind(this);
-    // this.handleContent = this.handleContent.bind(this);
-    // this.handleTags = this.handleTags.bind(this);
-    // this.handleRange = this.handleRange.bind(this);
-    // this.handleQuickDate = this.handleQuickDate.bind(this);
+    this.handleQuickDate = this.handleQuickDate.bind(this);
   }
 
 	handleChange(event) {
@@ -29,6 +24,23 @@ class Query extends Component {
 		console.log(event.target.name) // the name of the form element
 		console.log(event.target.value) // the value of the form element
 	}
+
+  handleQuickDate(event, param) {
+    event.preventDefault();
+    let startTime = event.target.value
+    startTime = Date.parse(startTime)
+    startTime = Math.round(startTime / 1000)
+    console.log('The button was clicked.', startTime)
+
+    const newTime = startTime - param
+    console.log('New time: ', newTime)
+
+    let readDate = new Date(newTime * 1000)
+    console.log('readable : ', readDate)
+
+    this.setState({ startTime: readDate })
+    console.log(this.state.startTime)
+  }
 
   render() {
     console.log(this.props)

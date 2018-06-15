@@ -6,11 +6,11 @@ import 'react-bootstrap-table/dist/react-bootstrap-table-all.min.css'
 class Table extends Component {
   render(){
     return(
-      <BootstrapTable data={this.props.data} striped hover condensed>
-        <TableHeaderColumn isKey dataField='timestamp'>Timestamp</TableHeaderColumn>
+      <BootstrapTable data={this.props.response.data} striped hover condensed>
+        <TableHeaderColumn isKey dataField='transaction_hash'>Timestamp</TableHeaderColumn>
         <TableHeaderColumn dataField='content_hash'>Conetent Hash</TableHeaderColumn>
-        <TableHeaderColumn dataField='transaction_hash'>Transaction Hash</TableHeaderColumn>
-        <TableHeaderColumn dataField='tags'>Tags</TableHeaderColumn>
+        <TableHeaderColumn dataField='tags'>Transaction Hash</TableHeaderColumn>
+        <TableHeaderColumn dataField='timestamp'>Tags</TableHeaderColumn>
       </BootstrapTable>
     )
   }

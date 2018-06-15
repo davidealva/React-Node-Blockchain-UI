@@ -105,10 +105,10 @@ class App extends Component {
             handleContent={ this.handleContent.bind(this) }
             handleTags={ this.handleTags.bind(this) }
             handleRange={ this.handleRange.bind(this)}
-            data= {this.state.response}
+            response={ this.state.response }
           />
         </Row>
-        <Row><Table data= {this.state.response}/></Row>
+        <Row><Table response={ this.state.response }/></Row>
       </div>
     );
   }
