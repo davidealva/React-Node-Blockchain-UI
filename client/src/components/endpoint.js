@@ -5,8 +5,8 @@ import { Form, Button, Input, Option, Select } from 'muicss/react'
 
 class Endpoint extends Component {
 
-	onSubmit(ev) {
-    ev.preventDefault();  // prevent form submission
+	onSubmit(event) {
+    event.preventDefault();  // prevent form submission
     alert(this.select.controlEl.value);
   }
 
@@ -28,13 +28,13 @@ class Endpoint extends Component {
 				<div className="mui-col-md-7 mui-col-md-offset-1">
 					<Form inline={true}>
 						<legend>Enter New Endpoint:</legend>
-					<div className="mui-col-md-4">
+					<div className="mui-col-md-4 no-padding-left">
 		        	<Input label="IP Address" floatingLabel={true} />
 					</div>
 					<div className="mui-col-md-4">
 		        <Input label="Authorization Token" floatingLabel={true}/>
 					</div>
-		        <Button color="primary" >Submit</Button>
+		        <Button color="primary">Submit</Button>
 		      </Form>
 				</div>
 			</div>

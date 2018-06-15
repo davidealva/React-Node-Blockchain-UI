@@ -2,109 +2,89 @@
 import React, { Component } from 'react'
 import { Form, Button, Input, Col } from 'muicss/react'
 
-Date.prototype.addHours = function(h){
-    this.setHours(this.getHours()+h);
-    return this;
-}
 
 const now = new Date()
-const later = new Date().addHours(22);
+const timeNow = now.getTime()
+
 
 class Query extends Component {
-	constructor(props) {
+
+  constructor(props) {
     super(props);
+
     this.state = {
-			response: [],
-			content_hash: '',
-			content: ''
-		};
-    this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
+      startTime: new Date(now),
+      endTime: new Date(now),
+		}
+    this.handleChange = this.handleChange.bind(this)
+    // this.handleHash = this.handleHash.bind(this);
+    // this.handleContent = this.handleContent.bind(this);
+    // this.handleTags = this.handleTags.bind(this);
+    // this.handleRange = this.handleRange.bind(this);
+    // this.handleQuickDate = this.handleQuickDate.bind(this);
   }
 
 	handleChange(event) {
-		this.setState({ [event.target.name]: event.target.value });
-		console.log(event.target.name); // the name of the form element
-		console.log(event.target.value); // the value of the form element
+		this.setState({ [event.target.name]: event.target.value })
+		console.log(event.target.name) // the name of the form element
+		console.log(event.target.value) // the value of the form element
 	}
 
-	handleSubmit(event) {
-		event.preventDefault();
-		const data = new FormData(event.target);
-		console.log(data)
-
-		for (var key of data.keys()) {
-		   console.log(key);
-		}
-		// Display the values
-		for (var value of data.values()) {
-		   console.log(value);
-		}
-		const url = `/query/hash/?${key}=${value}`
-		console.log(url)
-
-    fetch(url)
-      .then(response => response.json())
-      .then(data => this.setState({ response: data }));
-
+  render() {
+    console.log(this.props)
+    return (
+      <div id="query" className="mui-col-md-7 mui-col-md-offset-1">
+        <h4>Query Blockchain:</h4>
+        <div id="date">
+          <div className="mui--text-caption mui--text-dark-secondary">Quick Date Range - Last:</div>
+          <Button size="small" variant="raised" color="primary" value={this.state.startTime} onClick={(e) => this.handleQuickDate(e, 60)}>1 MIN</Button>
+          <Button size="small" variant="raised" color="primary" value={this.state.startTime} onClick={(e) => this.handleQuickDate(e, 300)}>5 MINS</Button>
+          <Button size="small" variant="raised" color="primary" value={this.state.startTime} onClick={(e) => this.handleQuickDate(e, 3600)}>HOUR</Button>
+          <Button size="small" variant="raised" color="primary" value={this.state.startTime} onClick={(e) => this.handleQuickDate(e, 14400)}>4 HOURS</Button>
+          <Button size="small" variant="raised" color="primary" value={this.state.startTime} onClick={(e) => this.handleQuickDate(e, 86400)}>DAY</Button>
+          <Button size="small" variant="raised" color="primary" value={this.state.startTime} onClick={(e) => this.handleQuickDate(e, (7*86400))}>WEEK</Button>
+        </div>
+        <div>
+          <Form inline={true} onSubmit={this.props.handleRange}>
+            <Col xs="4">
+              <Input label="Date Range Start:" placeholder="Start Date" value={this.state.startTime.toLocaleString()} name="from" onChange={this.handleChange}/>
+            </Col>
+            <Col xs="4">
+              <Input label="Date Range End:"placeholder="End Date" value={this.state.endTime.toLocaleString()} name="to"  onChange={this.handleChange}/>
+            </Col>
+            <Button className="mui--pull-right" color="primary" type="submit" value="Submit">Submit</Button>
+            <div className="mui--clearfix"></div>
+          </Form>
+        </div>
+        <div>
+          <Form inline={true} onSubmit={this.props.handleContent}>
+            <Input label="Content:" placeholder="Enter content" type="text" name="content" value={this.state.content} onChange={this.handleChange}/>
+            <Button className="mui--pull-right" color="primary" type="submit" value="Submit">Submit</Button>
+            <div className="mui--clearfix"></div>
+          </Form>
+        </div>
+        <div>
+          <Form inline={true} onSubmit={this.props.handleHash}>
+            <Input label="Content Hash:" placeholder="Enter content hash" type="text" name="content_hash" value={this.state.content_hash} onChange={this.handleChange}/>
+            <Button className="mui--pull-right" color="primary" type="submit" value="Submit">Submit</Button>
+            <div className="mui--clearfix"></div>
+          </Form>
+        </div>
+        <div>
+          <Form inline={true} onSubmit={this.props.handleHash}>
+            <Input label="Transaction Hash:" placeholder="Enter transaction hash" name="transaction_hash" value={this.state.transaction_hash} onChange={this.handleChange}/>
+            <Button className="mui--pull-right" color="primary" type="submit" value="Submit">Submit</Button>
+          </Form>
+        </div>
+        <div>
+          <Form inline={true} onSubmit={this.props.handleTags}>
+          <Input label="Tags:" placeholder="Enter tag name and value seperated by comma (tag=val, tag2=val2)" name="tags" value={this.state.tags} onChange={this.handleChange}/>
+            <Button className="mui--pull-right" color="primary" type="submit" value="Submit">Submit</Button>
+          </Form>
+        </div>
+      </div>
+    );
   }
-
-
-	render() {
-		return (
-			<div id="query" className="mui-col-md-7 mui-col-md-offset-1">
-				<h2>Query Blockchain:</h2>
-				<div id="date">
-					<div className="mui--text-caption mui--text-dark-secondary">Quick Date Range - Last:</div>
-					<Button size="small" variant="raised" color="primary">1 MIN</Button>
-          <Button size="small" variant="raised" color="primary">5 MINS</Button>
-          <Button size="small" variant="raised" color="primary">HOUR</Button>
-					<Button size="small" variant="raised" color="primary">4 HOURS</Button>
-					<Button size="small" variant="raised" color="primary">DAY</Button>
-					<Button size="small" variant="raised" color="primary">WEEK</Button>
-				</div>
-				<div>
-					<Form inline={true} onSubmit={this.handleSubmit}>
-						<Col xs="4">
-							<Input label="Date Range:" placeholder="Start Date" defaultValue={now}/>
-						</Col>
-						<Col xs="4">
-							<Input placeholder="End Date" defaultValue={later} />
-						</Col>
-						<Button className="mui--pull-right" color="primary">Submit</Button>
-						<div className="mui--clearfix"></div>
-					</Form>
-				</div>
-				<div>
-					<Form inline={true} onSubmit={this.handleSubmit}>
-						<Input label="Content:" placeholder="Enter content" type="text" name="content" value={this.state.content} onChange={this.handleChange}/>
-						<Button className="mui--pull-right" color="primary" type="submit" value="Submit">Submit</Button>
-						<div className="mui--clearfix"></div>
-					</Form>
-				</div>
-				<div>
-					<Form inline={true} onSubmit={this.handleSubmit}>
-						<Input label="Content Hash:" placeholder="Enter content hash" type="text" name="content_hash" value={this.state.content_hash} onChange={this.handleChange}/>
-						<Button className="mui--pull-right" color="primary">Submit</Button>
-						<div className="mui--clearfix"></div>
-					</Form>
-				</div>
-				<div>
-					<Form inline={true}>
-					<Input label="Transaction Hash:" placeholder="Enter transaction hash"/>
-						<Button className="mui--pull-right" color="primary">Submit</Button>
-					</Form>
-				</div>
-				<div>
-					<Form inline={true}>
-					<Input label="Tags:" placeholder="Enter tag name and value seperated by comma (tag=val, tag2=val2)"/>
-						<Button className="mui--pull-right" color="primary">Submit</Button>
-					</Form>
-					<h1>{this.response}</h1>
-				</div>
-			</div>
-		);
-	}
 }
 
 export default Query
